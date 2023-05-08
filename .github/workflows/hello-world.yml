@@ -10,6 +10,6 @@ jobs:
       - name: Test
         run: ci/unit-test-app.sh
       - name: Set file permissions
-        - run: chmod +x ci/build-app.sh
+        run: chmod +x ci/build-app.sh
       - name: Build app
         run: ci/build-app.sh
