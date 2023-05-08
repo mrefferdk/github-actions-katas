@@ -1,5 +1,9 @@
 name: JAVA CI
 on: push
+env:
+  docker_username: ${{ github.actor }}
+  docker_password: ${{ secrets.GITHUB_TOKEN }}
+  GIT_COMMIT: ${{ GIT_COMMIT }}
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
@@ -7,12 +11,6 @@ jobs:
     steps:
       - name: Clone-down
         uses: actions/checkout@v3
-  Build:
-    needs: Clone-down
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug file list
-        run: ls -la
       - name: Test
         run: ci/unit-test-app.sh
       - name: Set file permissions
@@ -21,6 +19,16 @@ jobs:
         run: ci/build-app.sh
       - name: Upload Repo
         uses: actions/upload-artifact@v3
+        with:
+          name: code
+          path: .
+  Docker-image:
+    needs: Clone-down
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v2
         with:
           name: code
           path: .
