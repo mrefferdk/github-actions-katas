@@ -13,3 +13,8 @@ jobs:
         run: chmod +x ci/build-app.sh
       - name: Build app
         run: ci/build-app.sh
+      - name: Upload Repo
+          uses: actions/upload-artifact@v3
+          with:
+            name: code
+            path: .
