@@ -14,7 +14,7 @@ jobs:
       - name: Build app
         run: ci/build-app.sh
       - name: Upload Repo
-          uses: actions/upload-artifact@v3
-          with:
-            name: code
-            path: .
+        uses: actions/upload-artifact@v3
+        with:
+          name: code
+          path: .
