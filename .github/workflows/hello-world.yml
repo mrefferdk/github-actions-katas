@@ -39,6 +39,7 @@ jobs:
       - name: Set file permissions
         run: chmod +x ci/build-app.sh
   job-4:
+    runs-on: ubuntu-latest
     needs:
       - job-1
       - job-2
